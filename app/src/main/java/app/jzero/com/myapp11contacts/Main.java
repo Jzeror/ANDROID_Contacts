@@ -18,19 +18,12 @@ public class Main extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         final Context ctx = Main.this;
-        findViewById(R.id.create_db).setOnClickListener(
+        findViewById(R.id.go_login).setOnClickListener(
                 (View v)->{
                     SQLiteHelper helper = new SQLiteHelper(ctx); //helper 객체가 곧 db가 된다.
+                    startActivity(new Intent(ctx,Login.class));
                 }
         );
-        findViewById(R.id.go_login).setOnClickListener(
-                (View v)->this.startActivity(new Intent(ctx,Login.class))
-        );
-/*        findViewById(R.id.go_add).setOnClickListener(
-                (View v)->{
-                    this.startActivity(new Intent(ctx,Member_Add.class));
-                }
-        );*/
     }
     static class Member{int seq;String name,pw,email,phone,photo,addr;}
     static interface StatusService{public void perform();}
@@ -54,7 +47,7 @@ public class Main extends AppCompatActivity {
     }
     static class SQLiteHelper extends SQLiteOpenHelper{
         public SQLiteHelper(Context context) {
-            super(context, DBNAME, null, 1);
+            super(context, DBNAME, null, 2);
             this.getWritableDatabase();
         } //여기부터 어떻게 이동함?
 
@@ -66,10 +59,11 @@ public class Main extends AppCompatActivity {
             Log.d("실행할 쿼리    ::",sql);
             db.execSQL(sql);
             Log.d("===================","create 쿼리실행완료");
-            String[] arr = {"","김진태","김지은","김준","김단아","홍혜리"};
+            String[] arr = {"","김진태","손나은","아이유","청하","유재석"};
+            String[] emails ={"","gimoon@naver.com","sonnacute@lycos.com","youandi@hanmail.com","jinro@yahoo.com","myungsoo@google.com"};
             for(int i = 1; i<=5; i++){
                 db.execSQL(String.format("INSERT INTO %s ( %s  , %s , %s  , %s  , %s  , %s ) VALUES ('%s' , '%s' , '%s' , '%s' , '%s' , '%s')", MEMTAB, MEMNAME, MEMPW, MEMEMAIL, MEMPHONE, MEMPHOTO, MEMADDR
-                        , arr[i], "1", "peace_"+i+"@test.com", "010-1234-567"+i, "love_"+i+".jpg", "신촌로 "+i+"길"));
+                        , arr[i], "1", emails[i], "010-1234-567"+i, "profile_"+i, "신촌로 "+i+"길"));
             }
             Log.d("===================","insert 쿼리실행완료");
         }

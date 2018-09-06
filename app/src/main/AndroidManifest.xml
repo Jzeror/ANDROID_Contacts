@@ -10,14 +10,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Main">
+
+        </activity>
+        <activity android:name=".Member_Add" />
+        <activity android:name=".Member_List" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".Member_Add" />
-        <activity android:name=".Member_List" />
+        </activity>>
         <activity android:name=".Member_Detail" />
         <activity android:name=".Member_Update" />
         <activity android:name=".Login"></activity>
